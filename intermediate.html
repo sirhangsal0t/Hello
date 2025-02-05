@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Question</title>
+    <title>The BIG Question</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
         
@@ -44,7 +44,7 @@
     </style>
 </head>
 <body>
-    <h1 id="question">Will you be my valentine?</h1>
+    <h1 id="question">👉👈 <br> 🌹 Will you be my valentine for prom ? 🌹</h1>
     <div class="button-container">
         <button id="yesBtn">Yes</button>
         <button id="noBtn">No</button>
@@ -52,18 +52,18 @@
     <script>
         let noClickCount = 0;
         document.getElementById("yesBtn").addEventListener("click", function() {
-            window.location.href = "yes.html"; // Replace with actual congratulatory page
+            window.location.href = "https://sirhangsal0t.github.io/Hello/final"; 
         });
         document.getElementById("noBtn").addEventListener("click", function() {
             noClickCount++;
             if (noClickCount >= 5) {
-                document.getElementById("question").textContent = "You don't have a choice, You're coming with me now";
+                document.getElementById("question").textContent = "You don't have a choice, You're coming with me now ❤️";
                 document.querySelector(".button-container").innerHTML = `
-                    <button class="final-button" onclick="window.location.href='yes.html'">Fine</button>
-                    <button class="final-button" onclick="window.location.href='yes.html'">Okay</button>
-                    <button class="final-button" onclick="window.location.href='yes.html'">Yes...</button>
-                    <button class="final-button" onclick="window.location.href='yes.html'">Alright</button>
-                    <button class="final-button" onclick="window.location.href='yes.html'">Yay!</button>
+                    <button class="final-button" onclick="window.location.href='https://sirhangsal0t.github.io/Hello/final'">Fine</button>
+                    <button class="final-button" onclick="window.location.href='https://sirhangsal0t.github.io/Hello/final'">Okay</button>
+                    <button class="final-button" onclick="window.location.href='https://sirhangsal0t.github.io/Hello/final'">Yes...</button>
+                    <button class="final-button" onclick="window.location.href='https://sirhangsal0t.github.io/Hello/final'">Alright</button>
+                    <button class="final-button" onclick="window.location.href='https://sirhangsal0t.github.io/Hello/final'">Yay!</button>
                 `;
             } else {
                 let noBtn = document.getElementById("noBtn");
