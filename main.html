@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Image Popup</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8a5a5;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+        }
+        h1 {
+            transition: font-size 0.2s ease-in-out;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background-color: #f76f6f;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+            pointer-events: auto;
+        }
+        .popup-image {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="dialogue">Are you Kalyani Kore?</h1>
+    <button id="popupBtn">Yes</button>
+    <script>
+        let clickCount = 0;
+        const maxClicks = 20;
+        const redirectURL = "https://example.com"; // Change this to the desired URL
+        let isCooldown = false;
+        
+        const dialogues = [
+            "Are you Kalyani Kore?",
+            "Try Again", "Try Again", "Try Again", "Try Again", "Try Again",
+            "Are you sure?", "Really?", "I don’t believe you", "The one with the panda lamp?",
+            "THAT’S YOU?", "You’re joking!", "Wait… could it be?", "I think I remember now…",
+            "Okay, I believe you!",  "Lemme see where I kept it", "Alright, Gimme a second", "Ok, I'm Excited, Ready ?", "Here we go !!"
+        ];
+        
+        const buttonTexts = [
+            "Yes", "Try Again", "Try Again", "Try Again", "Try Again", "Try Again",
+            "YES", "YESSSS!!", "IT IS ME", "I SWEAR TO THE PANDA lord",
+            "BELIEVE ME!", "I AM THE ONE!", "TRUST ME!", "IT IS MY DESTINY!", "AT LAST!", "Really, You're gonna make me wait", "Done ?", "YESSS", "LESGOO" 
+        ];
+        
+        document.getElementById("popupBtn").addEventListener("click", function() {
+            if (isCooldown) return;
+            if (clickCount >= maxClicks) {
+                window.location.href = redirectURL;
+                return;
+            }
+            
+            document.getElementById("dialogue").textContent = dialogues[Math.min(clickCount, dialogues.length - 1)];
+            this.textContent = buttonTexts[Math.min(clickCount, buttonTexts.length - 1)];
+            
+            if (clickCount >= 6) {
+                document.getElementById("dialogue").style.fontSize = `${1 + (clickCount - 5) * 0.2}em`;
+            }
+            if (clickCount === dialogues.length - 1) {
+                document.getElementById("dialogue").style.fontSize = "2em";
+            }
+            
+            clickCount++;
+            const img = document.createElement("img");
+            img.src = "https://via.placeholder.com/100"; // Replace with your image URL
+            img.classList.add("popup-image");
+            document.body.appendChild(img);
+            
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 100);
+            img.style.left = `${x}px`;
+            img.style.top = `${y}px`;
+            
+            let baseSpeed = 1;
+            let maxSpeed = 2;
+            let speedFactor = Math.min((clickCount - 6) / (maxClicks - 6), 1);
+            let dx = baseSpeed + speedFactor * (maxSpeed - baseSpeed);
+            let dy = baseSpeed + speedFactor * (maxSpeed - baseSpeed);
+            
+            function moveImage() {
+                let rect = img.getBoundingClientRect();
+                if (rect.left <= 0 || rect.right >= window.innerWidth) dx *= -1;
+                if (rect.top <= 100 || rect.bottom >= window.innerHeight) dy *= -1;
+                img.style.left = `${rect.left + dx}px`;
+                img.style.top = `${rect.top + dy}px`;
+                requestAnimationFrame(moveImage);
+            }
+            moveImage();
+            
+            isCooldown = true;
+            setTimeout(() => { isCooldown = false; }, 100);
+        });
+    </script>
+</body>
+</html>
